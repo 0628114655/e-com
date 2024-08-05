@@ -1,0 +1,68 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-lg-9  ">
+            <div class="card mb-3" style="max-width: 800px;">
+                <div class="row g-0">
+                    <div class="col-md-4 col-11">
+                        <img src="{{product.imageURL}}"  class="img-fluid rounded-start my-5 mx-3" alt="{{ product.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title d-flex justify-content-center">{{ product.name }}</h3>
+                            <p class="card-text text-start">
+                                <strong>Key Features:</strong><br>
+                                {{product.description}}
+                            </p>
+                            <h4 class="card-text d-flex justify-content-between text-body-secondary">
+                                <a href="#" data-product="{{ product.id }}" data-action="add" class="btn btn-outline-warning me-2 update-item"><strong>Add To Cart</strong></a>
+                                {{ product.price }} $
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-12 my-auto">
+            <h3 class="mb-3">Share this product:</h3>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'images/fb.png' %}" style="height: 50px; width: 50px; text-decoration: none" alt="Share on Facebook">
+            </a>
+            <a href="https://www.api.whatsapp.com/send?text=Check out this amazing product: {{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'images/wa.png' %}" style="height: 50px; width: 50px; text-decoration: none" alt="Share on WhatsApp">
+            </a>
+            <a href="https://www.X.com/intent/tweet?url={{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'images/X.png' %}" style="height: 50px; width: 50px; text-decoration: none" alt="Share on Twitter">
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'images/li.png' %}" style="height: 50px; width: 50px; text-decoration: none" alt="Share on LinkedIn">
+            </a>
+        </div>
+    </div>
+
+    <h3 class="m-3 mt-5 mb-3">See More:</h3>
+   
+    <div class="row" >
+        {% for product in products %}
+            <div class="col-12  col-sm-6 col-lg-4 col-xl-3">
+                <div class="card m-2 " >
+                    <img src="{{ product.imageURL }}" class="card-img-top mx-auto my-2 view-img" style="width: 70%; height: 150px; object-fit: contain; " alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>{{ product.name }}</strong></h5>
+                        <p class="card-text"><strong>$ {{ product.price }}</strong></p>
+                        <div class="d-flex justify-content-between">
+                            <a href="#" data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary update-item">Add To Cart</a>
+                            <a href="{% url 'product' product.id %}" class="btn btn-outline-success">View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
