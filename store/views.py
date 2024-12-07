@@ -7,6 +7,7 @@ from .utils import *
 from django.http import JsonResponse
 from .models import *
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -21,6 +22,10 @@ def store (request):
         'items': items,
         'cart_items': cart_items}
     return render (request, 'store/store.html', context )
+
+@login_required
+def required(request):
+    return render (request, 'store/required.html')
 
 def electronics(request):
     cookieData =  cart_data(request)

@@ -46,11 +46,7 @@ def cart_data(request):
         order = data['order']
         items = data['items']
         cart_items = data['cart_items']
-  
-
     return {'order': order, 'items' :items, 'cart_items': cart_items }
-
-
 
 def guestOrder(request, data):
     print('User is not logged in..')
